@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Mini Clone</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f2f0;
+        }
+        
+        .navbar {
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .post-card {
+            transition: all 0.2s ease;
+        }
+        
+        .post-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+        }
+        
+        .linkedin-blue {
+            background-color: #0a66c2;
+        }
+        
+        .linkedin-blue:hover {
+            background-color: #004182;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #ccc;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar bg-white fixed top-0 w-full z-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between h-14 items-center">
+                <div class="flex items-center space-x-2">
+                    <i class="fab fa-linkedin text-2xl text-[#0a66c2]"></i>
+                    <div class="relative hidden md:block">
+                        <input type="text" placeholder="Search" class="bg-[#eef3f8] rounded px-3 py-1 pl-8 w-64 focus:outline-none">
+                        <i class="fas fa-search absolute left-2 top-2 text-gray-500 text-sm"></i>
+                    </div>
+                </div>
+                
+                <div class="flex items-center space-x-1 lg:space-x-6">
+                    <a href="https://www.linkedin.com/feed/" class="flex flex-col items-center px-4 py-2 text-gray-500 hover:text-black">
+                        <i class="fas fa-home"></i>
+                        <span class="text-xs">Home</span>
+                    </a>
+                    <a href="https://www.linkedin.com/mynetwork/" class="flex flex-col items-center px-4 py-2 text-gray-500 hover:text-black">
+                        <i class="fas fa-user-friends"></i>
+                        <span class="text-xs">Network</span>
+                    </a>
+                    <a href="https://www.linkedin.com/jobs/" class="flex flex-col items-center px-4 py-2 text-gray-500 hover:text-black">
+                        <i class="fas fa-briefcase"></i>
+                        <span class="text-xs">Jobs</span>
+                    </a>
+                    <a href="https://www.linkedin.com/messaging/" class="flex flex-col items-center px-4 py-2 text-gray-500 hover:text-black">
+                        <i class="fas fa-comment-alt"></i>
+                        <span class="text-xs">Messaging</span>
+                    </a>
+                    <a href="#" class="flex flex-col items-center px-4 py-2 text-gray-500 hover:text-black">
+                        <i class="fas fa-bell" onclick="showNotifications()"></i>
+                        <a href="https://www.linkedin.com/pulse/topics/home/?trk=public_profile_guest_nav_menu_articles" class="hidden lg:inline">
+                        <span class="text-xs">Notifications <span class="notification-count hidden">3</span></span>
+                    </a>
+                    
+                    <div class="border-l h-8 border-gray-300 hidden lg:block"></div>
+                    
+                    <div class="dropdown relative">
+                        <a href="https://www.linkedin.com/in/your-profile/" class="flex items-center hover:underline">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3df0f943-891a-4fdb-ab4b-5b6b4fc1b1d9.png" alt="Professional headshot of the user with blue shirt and glasses" class="rounded-full w-6 h-6">
+                            <span class="ml-1 hidden lg:inline text-sm font-medium">Me <i class="fas fa-caret-down text-xs"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto pt-16 px-4 grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <!-- Left Sidebar - Profile and Connections -->
+        <div class="lg:col-span-1 lg:block space-y-4">
+            <!-- Profile Card -->
+            <div class="bg-white rounded-lg shadow overflow-hidden">
+                <div class="relative">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ae4bdd6d-aac6-4c90-9be5-98e99b751b24.png" alt="Professional banner image with abstract blue business theme" class="w-full h-20 object-cover">
+                    <div class="absolute -bottom-8 left-4">
+                        <img src="https://i.imgur.com/VvTp3JU.jpg" alt="Professional headshot of Alex Johnson smiling in business attire" class="rounded-full border-4 border-white w-16 h-16">
+                    </div>
+                </div>
+                <div class="pt-6 px-4 pb-4">
+                    <h2 class="font-bold text-lg">Alex Johnson</h2>
+                    <p class="text-sm text-gray-600">Software Engineer at TechCorp Inc.</p>
+                    <div class="border-t my-3"></div>
+                    <div class="flex justify-between text-xs text-gray-500">
+                        <span>Who viewed your profile</span>
+                        <span class="font-semibold text-blue-600">124</span>
+                    </div>
+                    <div class="flex justify-between text-xs text-gray-500 mt-1">
+                        <span>Connections</span>
+                        <span class="font-semibold text-blue-600">583</span>
+                    </div>
+                    <a href="https://www.linkedin.com/mynetwork/invite-connect/connections/" class="w-full bg-blue-50 text-blue-600 text-sm font-medium py-1 rounded mt-3 hover:bg-blue-100 flex justify-center">
+                        Grow your network
+                    </a>
+                </div>
+            </div>
+
+            <!-- Premium Card -->
+            <div class="bg-white rounded-lg shadow p-4">
+                <p class="text-xs text-gray-600 mb-2">Access exclusive tools & insights</p>
+                <div class="flex items-start mb-2">
+                    <i class="fas fa-crown text-yellow-400 mr-2 pt-1"></i>
+                    <a href="https://www.linkedin.com/premium/" class="text-sm font-medium">Try Premium for free</a>
+                </div>
+            </div>
+
+            <!-- My Items -->
+            <div class="bg-white rounded-lg shadow p-4">
+                <div class="flex items-center">
+                    <i class="far fa-bookmark text-gray-500 mr-2"></i>
+                    <span class="text-sm font-medium">My Items</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center Feed -->
+        <div class="lg:col-span-2 space-y-4">
+            <!-- Create Post -->
+            <div class="bg-white rounded-lg shadow p-4">
+                <div class="flex items-center space-x-2 mb-3">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/81dff6bb-5d59-4cd9-840a-8c3e222e8464.png" alt="User profile picture showing a professional headshot" class="rounded-full w-10 h-10">
+                    <button class="bg-gray-100 hover:bg-gray-200 rounded-full px-4 py-2 text-gray-700 text-sm font-medium flex-grow text-left" onclick="showPostModal()">
+                        Start a post
+                    </button>
+                </div>
+                <div class="flex justify-between text-gray-500 text-sm">
+                    <button class="flex items-center px-4 py-2 hover:bg-gray-100 rounded">
+                        <i class="far fa-image text-blue-500 mr-1"></i>
+                        <span>Photo</span>
+                    </button>
+                    <button class="flex items-center px-4 py-2 hover:bg-gray-100 rounded">
+                        <i class="fas fa-video text-green-600 mr-1"></i>
+                        <span>Video</span>
+                    </button>
+                    <button class="flex items-center px-4 py-2 hover:bg-gray-100 rounded">
+                        <i class="far fa-calendar-alt text-orange-500 mr-1"></i>
+                        <span>Event</span>
+                    </button>
+                    <button class="flex items-center px-4 py-2 hover:bg-gray-100 rounded">
+                        <i class="far fa-newspaper text-blue-400 mr-1"></i>
+                        <a href="https://www.linkedin.com/pulse/topics/home/?trk=public_profile_guest_nav_menu_articles" class="text-blue-600">Write article</a>
+                        <span>Write article</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Feed Posts -->
+            <div class="bg-white rounded-lg shadow post-card">
+                <div class="p-4">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex space-x-2">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/9e869a95-55ef-4a5e-9a86-3d4090868419.png" alt="Profile photo of Sarah Williams, Marketing Director" class="rounded-full w-12 h-12">
+                            <div>
+                                <h3 class="font-semibold">Sarah Williams</h3>
+                                <p class="text-xs text-gray-500">Marketing Director at BrandVision • 2nd</p>
+                                <p class="text-xs text-gray-500">1d • <i class="fas fa-globe"></i></p>
+                            </div>
+                        </div>
+                        <button>
+                            <i class="fas fa-ellipsis-h text-gray-500"></i>
+                        </button>
+                    </div>
+                    <p class="text-sm mb-4">Excited to share that we're hiring for several positions at BrandVision! We're looking for passionate marketers, designers, and product managers to join our growing team. Check out our careers page if you're interested!</p>
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b508a973-6ce9-4f7c-831e-489d96821594.png" alt="Team of diverse professionals collaborating in a modern office space" class="w-full rounded mb-3">
+                    <div class="flex justify-between text-gray-500 text-sm border-t pt-3">
+                        <button class="flex items-center space-x-1 hover:bg-gray-100 px-2 py-1 rounded">
+                            <i class="far fa-thumbs-up" onclick="toggleLike(this)"></i>
+                            <span class="like-count">Like</span>
+                        </button>
+                        <button class="flex items-center space-x-1 hover:bg-gray-100 px-2 py-1 rounded">
+                            <i class="far fa-comment" onclick="showCommentBox(1)"></i>
+                            <span>Comment</span>
+                        </div>
+                        <!-- Comment Box -->
+                        <div class="comment-box-1 hidden mt-3">
+                            <div class="flex">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/81dff6bb-5d59-4cd9-840a-8c3e222e8464.png" alt="Your profile" class="rounded-full w-8 h-8 mr-2">
+                                <input type="text" class="comment-input-1 flex-grow border rounded-full px-3" placeholder="Add a comment...">
+                                <button class="ml-2 text-blue-600 font-medium" onclick="addComment(1)">Post</button>
+                            </div>
+                            <div class="comments-container mt-2">
+                                <!-- Comments will be inserted here dynamically -->
+                                <a href="https://www.linkedin.com/feed/update/urn:li:activity:7328464131911581697/" class="text-blue-600 text-xs">View all comments</a>
+                        </div>
+                        </button>
+                        <button class="flex items-center space-x-1 hover:bg-gray-100 px-2 py-1 rounded">
+                            <i class="fas fa-share"></i>
+                            <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.brandvision.com/careers" class="text-blue-600">Share</a>
+                            <span>Share</span>
+                        </button>
+                        <button class="flex items-center space-x-1 hover:bg-gray-100 px-2 py-1 rounded">
+                            <i class="far fa-paper-plane"></i>
+                            <a href="https://www.linkedin.com/messaging/compose/" class="text-blue-600">Send</a>
+                            <span>Send</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow post-card">
+                <div class="p-4">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="flex space-x-2">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/89c953e2-410e-4d02-bd22-215c5c3198d5.png" alt="Profile photo of Michael Chen, Senior Developer" class="rounded-full w-12 h-12">
+                            <div>
+                                <h3 class="font-semibold">Michael Chen</h3>
+                                <p class="text-xs text-gray-500">Senior Developer at DevHub • 1st</p>
+                                <p class="text-xs text-gray-500">3h • <i class="fas fa-globe"></i></p>
+                            </div>
+                        </div>
+                        <button>
+                            <i class="fas fa-ellipsis-h text-gray-500"></i>
+                        </button>
+                    </div>
+                    <p class="text-sm mb-4">Just published my latest article on advanced React patterns! I cover some techniques I've found particularly useful for maintaining large-scale applications. Would love to hear your thoughts and experiences!</p>
+                    <div class="border rounded bg-gray-50 p-3 mb-3">
+                        <h4 class="font-semibold text-sm mb-1">Advanced React Patterns for Enterprise Applications</h4>
+                        <p class="text-xs text-gray-500">devhub.io/articles/react-patterns</p>
+                    </div>
+                    <div class="flex justify-between text-gray-500 text-sm border-t pt-3">
+                        <button class="flex items-center space-x-1 hover:bg-gray-100 px-2 py-1 rounded">
+                            <i class="far fa-thumbs-up"></i>
+                            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7328464131911581697/" class="text-blue-600">Like</a>
+                            <span>Like</span>
+                        </button>
+                        <button class="flex items-center space-x-1 hover:bg-gray-100 px-2 py-1 rounded">
+                            <i class="far fa-comment"></i>
+                            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7328464131911581697/" class="text-blue-600">Comment</a>
+                            <span>Comment</span>
+                        </button>
+                        <button class="flex items-center space-x-1 hover:bg-gray-100 px-2 py-1 rounded">
+                            <i class="fas fa-share"></i>
+                            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7328464131911581697/" class="text-blue-600">Share</a>
+                            <span>Share</span>
+                        </button>
+                        <button class="flex items-center space-x-1 hover:bg-gray-100 px-2 py-1 rounded">
+                            <i class="far fa-paper-plane"></i>
+                            <a href="https://www.linkedin.com/messaging/compose/" class="text-blue-600">Send</a>
+                            <span>Send</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Sidebar - News and Suggestions -->
+        <div class="lg:col-span-1 space-y-4">
+            <!-- News -->
+            <div class="bg-white rounded-lg shadow p-4">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="font-semibold">LinkedIn News</h3>
+                    <i class="fas fa-info-circle text-gray-400"></i>
+                </div>
+                <ul class="space-y-3">
+                    <li class="text-sm">
+                        <div class="font-medium">Tech hiring slows in Q2</div>
+                        <div class="text-xs text-gray-500">2d ago • 5,245 readers</div>
+                    </li>
+                    <li class="text-sm">
+                        <div class="font-medium">Remote work policies shifting</div>
+                        <div class="text-xs text-gray-500">1d ago • 3,892 readers</div>
+                    </li>
+                    <li class="text-sm">
+                        <div class="font-medium">AI investments surge</div>
+                        <div class="text-xs text-gray-500">3d ago • 8,763 readers</div>
+                    </li>
+                    <li class="text-sm">
+                        <div class="font-medium">Workplace benefits expanding</div>
+                        <div class="text-xs text-gray-500">4d ago • 2,145 readers</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Today's Top Courses -->
+            <div class="bg-white rounded-lg shadow p-4">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="font-semibold">Today's top courses</h3>
+                </div>
+                <ul class="space-y-3">
+                    <li class="text-sm">
+                        <div class="font-medium">Leadership in Hybrid Work</div>
+                        <div class="text-xs text-gray-500">LinkedIn Learning</div>
+                    </li>
+                    <li class="text-sm">
+                        <div class="font-medium">Data Science Essentials</div>
+                        <div class="text-xs text-gray-500">Coursera</div>
+                    </li>
+                    <li class="text-sm">
+                        <div class="font-medium">UX Design Fundamentals</div>
+                        <div class="text-xs text-gray-500">Udemy</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- People You May Know -->
+            <div class="bg-white rounded-lg shadow p-4">
+                <div class="flex justify-between items-center mb-3">
+                    <h3 class="font-semibold">People you may know</h3>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/58400796-bcb7-4286-9f72-20247ae8fbaf.png" alt="Profile photo of David Kim, Product Designer" class="rounded-full w-10 h-10">
+                            <div>
+                                <div class="text-sm font-medium">David Kim</div>
+                                <div class="text-xs text-gray-500">Product Designer at DesignCo</div>
+                            </div>
+                        </div>
+                        <button class="text-blue-600 text-xs font-medium connect-btn" data-user="David Kim" onclick="connectUser(this)">
+                            <i class="fas fa-plus"></i> Connect
+                            <a href="https://www.linkedin.com/login?session_redirect=https%3A%2F%2Fuk.linkedin.com%2Fin%2david-kim-copywriter&fromSignIn=true&trk=public_profile_browsemap_browse-map_connect-button" class="hidden">View Profile</a>
+                        </button>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/92eed3d5-e31d-420b-ab8a-d5376905e2ed.png" alt="Profile photo of Emma Rodriguez, HR Specialist" class="rounded-full w-10 h-10">
+                            <div>
+                                <div class="text-sm font-medium">Emma Rodriguez</div>
+                                <div class="text-xs text-gray-500">HR Specialist at PeopleFirst</div>
+                            </div>
+                        </div>
+                        <button class="text-blue-600 text-xs font-medium">
+                            <i class="fas fa-plus"></i> Connect
+                            <a href="https://www.linkedin.com/login?session_redirect=https%3A%2F%2Fuk.linkedin.com%2Fin%2Femma-rodriguez-hr-specialist&fromSignIn=true&trk=public_profile_browsemap_browse-map_connect-button" class="hidden">View Profile</a>
+                        </button>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/d34dad15-f7c2-4c32-8386-f51e7f196297.png" alt="Profile photo of James Wilson, Software Developer" class="rounded-full w-10 h-10">
+                            <div>
+                                <div class="text-sm font-medium">James Wilson</div>
+                                <div class="text-xs text-gray-500">Software Developer at CodeCraft</div>
+                            </div>
+                        </div>
+                        <button class="text-blue-600 text-xs font-medium">
+                            <i class="fas fa-plus"></i> Connect
+                            <a href="https://www.linkedin.com/login?session_redirect=https%3A%2F%2Fuk.linkedin.com%2Fin%2Fjames-wilson-software-developer&fromSignIn=true&trk=public_profile_browsemap_browse-map_connect-button" class="hidden">View Profile</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Full app functionality with state management
+        let connections = 583;
+        let connectedUsers = new Set();
+        
+        function connectUser(button) {
+            const username = button.getAttribute('data-user');
+            if (connectedUsers.has(username)) return;
+            
+            connectedUsers.add(username);
+            connections++;
+            button.innerHTML = '<i class="fas fa-check"></i> Pending';
+            button.classList.remove('text-blue-600');
+            button.classList.add('text-gray-500');
+            
+            // Update connections count
+            document.querySelectorAll('span:contains("Connections")').forEach(span => {
+                if(span.textContent.includes('Connections')) {
+                    span.nextElementSibling.textContent = connections;
+                }
+            });
+            
+            // Show notification
+            showNotifications(`Connection request sent to ${username}`);
+        }
+        let posts = [
+            {
+                id: 1,
+                author: "Sarah Williams",
+                content: "Excited to share that we're hiring for several positions at BrandVision! We're looking for passionate marketers, designers, and product managers to join our growing team. Check out our careers page if you're interested!",
+                likes: 42,
+                comments: [],
+                liked: false
+            },
+            {
+                id: 2,
+                author: "Michael Chen",
+                content: "Just published my latest article on advanced React patterns! I cover some techniques I've found particularly useful for maintaining large-scale applications. Would love to hear your thoughts and experiences!",
+                likes: 89,
+                comments: [],
+                liked: false
+            }
+        ];
+
+        // Post creation functionality
+        function showPostModal() {
+            const modal = `
+                <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div class="bg-white rounded-lg p-4 w-96">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="font-bold text-lg">Create a post</h3>
+                            <button onclick="document.querySelector('.modal-container').remove()">✕</button>
+                        </div>
+                        <textarea class="w-full border rounded p-2 mb-3" placeholder="What do you want to talk about?"></textarea>
+                        <button class="w-full bg-blue-600 text-white py-2 rounded font-medium" onclick="this.form.submit()">Post</button>
+                        <form action="https://www.linkedin.com/feed/" method="post" class="hidden">
+                            <input type="hidden" name="postContent" id="postContent">
+                        </form>
+                    </div>
+                </div>
+            `;
+            const container = document.createElement('div');
+            container.className = 'modal-container';
+            container.innerHTML = modal;
+            document.body.appendChild(container);
+        }
+
+        function createPost() {
+            const textarea = document.querySelector('.modal-container textarea');
+            if (textarea.value.trim()) {
+                const newPost = {
+                    id: posts.length + 1,
+                    author: "Alex Johnson",
+                    content: textarea.value,
+                    likes: 0,
+                    comments: [],
+                    liked: false
+                };
+                posts.unshift(newPost);
+                renderPosts();
+                document.querySelector('.modal-container').remove();
+            }
+        }
+
+        // Comment functionality
+        function showCommentBox(postId) {
+            const commentBox = document.querySelector(`.comment-box-${postId}`);
+            commentBox.classList.toggle('hidden');
+        }
+
+        function addComment(postId) {
+            const input = document.querySelector(`.comment-input-${postId}`);
+            if (input.value.trim()) {
+                posts.find(p => p.id === postId).comments.push({
+                    author: "Alex Johnson",
+                    text: input.value
+                });
+                renderPosts();
+                input.value = '';
+            }
+        }
+
+        // Like functionality
+        function renderPosts() {
+            posts.forEach(post => {
+                const container = document.querySelector(`.comments-container[data-post="${post.id}"]`);
+                if (container) {
+                    container.innerHTML = post.comments
+                        .map(comment => `
+                            <div class="comment flex items-start mb-2">
+                                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/81dff6bb-5d59-4cd9-840a-8c3e222e8464.png" alt="${comment.author}" class="rounded-full w-8 h-8 mr-2">
+                                <div>
+                                    <div class="text-sm font-medium">${comment.author}</div>
+                                    <div class="text-sm">${comment.text}</div>
+                                </div>
+                            </div>
+                        `)
+                        .join('');
+                }
+            });
+        }
+
+        function toggleLike(postId) {
+            const post = posts.find(p => p.id === postId);
+            if (post.liked) {
+                post.likes--;
+                post.liked = false;
+            } else {
+                post.likes++;
+                post.liked = true;
+            }
+            renderPosts();
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Connect button handlers
+            document.querySelectorAll('.connect-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    connections++;
+                    document.querySelectorAll('span:contains("Connections")').forEach(span => {
+                        if(span.textContent.includes('Connections')) {
+                            span.nextElementSibling.textContent = connections;
+                        }
+                    });
+                    this.innerHTML = '<i class="fas fa-check"></i> Pending';
+                    this.classList.remove('text-blue-600');
+                    this.classList.add('text-gray-500');
+                });
+            });
+            document.querySelectorAll('.post-card button:has(.fa-thumbs-up)').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    const span = this.querySelector('span');
+                    
+                    if (icon.classList.contains('far')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        icon.classList.add('text-blue-600');
+                        span.textContent = 'Liked';
+                    } else {
+                        icon.classList.remove('fas');
+                        icon.classList.remove('text-blue-600');
+                        icon.classList.add('far');
+                        span.textContent = 'Like';
+                    }
+                });
+            });
+
+            // Mobile menu toggle (would need more implementation for actual mobile nav)
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
